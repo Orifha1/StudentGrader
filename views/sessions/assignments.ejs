@@ -1,0 +1,19 @@
+<%- include("../partials/header") %>
+
+
+<h1>I am showing assignments</h1>
+
+<% session.assignments.forEach(function(assignment){ %>
+    <p>
+        <strong><%= assignment.author.username %></strong> - <%= assignment.text %>
+    </p>
+    <p><%= assignment.description %></p>
+<% }) %>
+
+<a href="/sessions/<%= session._id %>/assignments/new" class="material-icons floating-btn">add</a>
+<div class="label-container">
+    <div class="label-text">Create Session</div>
+    <i class="fa fa-play label-arrow"></i>
+</div>
+
+<%- include("../partials/footer") %>

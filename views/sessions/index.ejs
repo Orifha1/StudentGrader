@@ -1,0 +1,35 @@
+<%- include("../partials/header") %>
+
+<div class="container" id="sessions-content">
+
+
+    <% sessions.forEach(function(session){ %>
+    <div>
+        <div class="border rounded" id="sessionsContentDivider">
+            <div class="caption">
+                <strong>
+                    <h2><%= session.title %></h2>
+                </strong>
+                          
+            </div>
+            <p><span>Created: <%= session.created.toDateString() %></span> </p>
+                
+            <hr>
+    
+            <div>
+                <p><%= session.description %></p>
+            </div>
+            <p>
+                <a href="/sessions/<%= session._id %>/usercode" class="btn btn-primary">Proceed</a>
+            </p>
+        </div>
+    </div>
+    <% }); %>
+
+    
+    <a href="/sessions/new" class="material-icons floating-btn">add</a>
+    <div class="label-container">
+        <div class="label-text">Create Session</div>
+        <i class="fa fa-play label-arrow"></i>
+    </div>
+    <%- include("../partials/footer") %>

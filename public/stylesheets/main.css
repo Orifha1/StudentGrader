@@ -1,0 +1,82 @@
+
+body { 
+    padding-top: 70px;
+    font-family: 'Raleway', sans-serif;
+    background-color: #f9f9f9;
+ }
+#formContent {
+    margin-top: 40px;
+    margin-bottom: 2.0em;
+}
+#home-page-text{
+    margin-top: 40px;
+}
+#sessions-content{
+    margin-top: 40px;
+}
+#sessionsContentDivider{
+    margin: 30px;
+    padding: 7px;
+} 
+.jumbotron{
+    padding: 30px;
+}
+.floating-btn{
+    width: 60px;
+    height: 60px;
+    background: #00b7c2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 40px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
+    position: fixed;
+    right: 40px;
+    bottom: 40px;
+    /* transition: background 0.25s; */
+}
+
+/* .floating-btn:active{
+    background: #056676;
+} */
+
+.label-container{
+	position:fixed;
+	bottom:48px;
+	right:105px;
+	display:table;
+	visibility: hidden;
+}
+
+.label-text{
+	color:#FFF;
+	background:rgba(51,51,51,0.5);
+	display:table-cell;
+	vertical-align:middle;
+	padding:10px;
+	border-radius:3px;
+}
+
+.label-arrow{
+	display:table-cell;
+	vertical-align:middle;
+	color:#333;
+	opacity:0.5;
+}
+
+a.floating-btn + div.label-container {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s ease;
+}
+
+a.floating-btn:hover + div.label-container{
+  visibility: visible;
+  opacity: 1;
+}
+.custom-btn{
+    width: 130px;
+}

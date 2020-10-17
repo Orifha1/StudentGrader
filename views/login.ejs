@@ -1,0 +1,25 @@
+
+<%- include("./partials/header") %>
+
+
+<div class="d-flex justify-content-center container" id="formContent">
+    <form class="border border-dark p-5 w-75 p-3 rounded" action="/login" method="POST">
+        <div class="text-center">
+                <p class="h2 mb-4">Login</p> 
+          </div>
+        <div class="form-group">
+            <input type="text" class="form-control mb-4 input-sm" name="username" placeholder="Username">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control mb-4 input-sm" name="password" placeholder="Password">
+        </div>
+        <div class="form-group text-center">
+            <input type="submit" class="btn btn-primary custom-btn" value="Login">
+        </div>      
+    </form>
+</div>
+<p class="text-center">
+    <a href="/register">Create an Account</a>
+</p>
+
+<%- include("./partials/footer") %>
