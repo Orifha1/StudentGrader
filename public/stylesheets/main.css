@@ -15,7 +15,15 @@ body {
     margin-top: 40px;
 }
 #sessionsContentDivider{
-    margin: 30px;
+    margin: 20px;
+    padding: 7px;
+} 
+#assignments-content{
+    margin-top: 40px;
+}
+#assignmentsContentDivider{
+    
+    margin: 20px;
     padding: 7px;
 } 
 .jumbotron{

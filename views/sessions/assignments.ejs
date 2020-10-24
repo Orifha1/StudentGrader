@@ -1,14 +1,36 @@
 <%- include("../partials/header") %>
 
+<div class="container" id="assignments-content">
+<h1 class="text-center">Assignments</h1>
 
-<h1>I am showing assignments</h1>
+    
+    <% session.assignments.forEach(function(assignment){ %>
+        <div class="border rounded" id="assignmentsContentDivider">
+            <div class="caption">
+                <p>
+                    <h2>
+                        <strong><%= assignment.author.username %></strong> - <%= assignment.text %>
+                    </h2>    
+                </p>
+            </div>
+            <p class="text-right"><span>Created: <%= assignment.created.toDateString() %></span> </p>
+            <hr>
+            <div>
+                <p><%= assignment.description %></p>
+            </div>
+            <p>
+                <a href="/sessions/<%= session._id %>/show" class="btn btn-primary">View</a>
+            </p>
+        </div>
+        
+        
+    <% }) %>
 
-<% session.assignments.forEach(function(assignment){ %>
-    <p>
-        <strong><%= assignment.author.username %></strong> - <%= assignment.text %>
-    </p>
-    <p><%= assignment.description %></p>
-<% }) %>
+
+
+
+
+</div>
 
 <a href="/sessions/<%= session._id %>/assignments/new" class="material-icons floating-btn">add</a>
 <div class="label-container">
