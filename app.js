@@ -168,8 +168,10 @@ app.post("/sessions/:id/assignments", isLoggedIn, function (req, res) {
 
 
 
-
-
+// Show the assignment details.
+app.get("/sessions/:id/assignments/show", function (req, res) {
+    res.render("show");
+});
 
 //===============
 //AUTH ROUTE   
