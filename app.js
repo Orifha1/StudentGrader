@@ -8,8 +8,8 @@ var Assignment = require("./models/assignment");
 var User = require("./models/user");
 var seedDB = require("./seeds");
 const { db } = require('./models/session');
+const user = require('./models/user');
 var app = express();
-
 
 //APP CONFIG
 mongoose.connect("mongodb://localhost:27017/student_grader", { useNewUrlParser: true });
@@ -233,16 +233,27 @@ app.get("/sessions/:id/usercode", isLoggedIn, function (req, res) {
 //Handle the secret code by comparing it to the admin code
 app.post("/sessions/:id/usercode", isLoggedIn ,function (req, res) {
     var newAdmin = new Session({admincode: req.body.admincode});
+    //var 
+    var userRole = req.user._id;
     //var session = Session({})
     Session.findById(req.params.id, function (err, session) {
-             
         if (err) {
             console.log(err);
         } 
         else 
-            if (req.body.admincode === session.admincode){
-                newAdmin.isAdmin = true;
+            if (req.body.admincode === session.admincode ){
+                console.log(userRole);
+                db.collection("users").updateOne({_id: userRole}, {"$set":{isAdmin:true}},(err,res) =>{
+                    if(err){
+                        console.log("database error - can not update"); 
+                        return;
+                        
+                    }
+                    //console.log(res);
+                })
+                //userRole = true;
                 console.log("You are now an Admin");
+                //console.log(userRole);
                 res.redirect('/sessions/' + session._id);
             }
         else{

@@ -88,3 +88,6 @@ a.floating-btn:hover + div.label-container{
 .custom-btn{
     width: 130px;
 }
+.nav-item:hover{
+    text-decoration: underline;
+}

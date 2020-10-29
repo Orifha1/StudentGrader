@@ -1,7 +1,18 @@
 <%- include("partials/header") %>
+<div class="container" id="assignments-content">
+  <h1 class="text-center">All Students and projects that need to be marked</h1>
+  <% if(currentUser && currentUser.isAdmin){ %>
+  <ul class="list-group list-group-flush">
+    <p></p>
+    <li class="list-group-item">
+      <strong><em>Orifha Tshikotshi - 27514153 : Automating classroom activities</em></strong>
+      <div class="text-right"><button type="button" class="btn btn-success">Grade Student</button></div>
+    </li>
+    <p></p>
+  </ul>
+  <% } %>
 
-<h1></h1>
-
+</div>
 
 
 <%- include("partials/footer") %>
