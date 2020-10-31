@@ -2,13 +2,20 @@
 <div class="container" id="assignments-content">
   <h1 class="text-center">All Students and projects that need to be marked</h1>
   <% if(currentUser && currentUser.isAdmin){ %>
+    
+    <div class="text-center">
+      <button type="button" class="btn btn-primary"> create rubric table</button>
+      <button type="button" class="btn btn-primary">add rubric file</button>
+    </div>
   <ul class="list-group list-group-flush">
-    <p></p>
-    <li class="list-group-item">
-      <strong><em>Orifha Tshikotshi - 27514153 : Automating classroom activities</em></strong>
-      <div class="text-right"><button type="button" class="btn btn-success">Grade Student</button></div>
-    </li>
-    <p></p>
+    <% sessions.participants.forEach(function(participant){ %>
+      <p></p>
+      <li class="list-group-item">
+        <strong><em><%= participant.username %> - <%= participant.personNumber %>: <%= participant.projectTitle %></em></strong>
+        <div class="text-right"><button type="button" class="btn btn-success">Grade Student</button></div>
+      </li>
+      <p></p>
+      <% }); %>
   </ul>
   <% } %>
 

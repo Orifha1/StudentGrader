@@ -18,7 +18,13 @@ var sessionsSchema = new mongoose.Schema({
          type: mongoose.Schema.Types.ObjectId,
          ref: "Assignment"
       } 
-   ]
+   ],
+   participants: [
+      {
+         type: mongoose.Schema.Types.ObjectId,
+         ref: "User"
+      }
+   ],
 });
 
 module.exports = mongoose.model("Session", sessionsSchema);
