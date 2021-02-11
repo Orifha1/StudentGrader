@@ -2,24 +2,79 @@
 <div class="container" id="assignments-content">
   <h1 class="text-center">All Students and projects that need to be marked</h1>
   <% if(currentUser && currentUser.isAdmin){ %>
-    
-    <div class="text-center">
-      <button type="button" class="btn btn-primary"> create rubric table</button>
-      <button type="button" class="btn btn-primary">add rubric file</button>
-    </div>
+
+  <div class="text-center">
+    <button type="file" class="btn btn-primary" name="file" id="inputGroupFile04">add rubric file</button>
+  </div>
+  <% } %>
+  <% var total = 0;  %>
   <ul class="list-group list-group-flush">
     <% sessions.participants.forEach(function(participant){ %>
-      <p></p>
-      <li class="list-group-item">
-        <strong><em><%= participant.username %> - <%= participant.personNumber %>: <%= participant.projectTitle %></em></strong>
-        <div class="text-right"><button type="button" class="btn btn-success">Grade Student</button></div>
-      </li>
-      <p></p>
-      <% }); %>
+    <p></p>
+    <li class="list-group-item">
+      <strong><em><%= participant.username %> - <%= participant.personNumber %>:
+          <%= participant.projectTitle %></em></strong>
+      <div class="text-right"><a href="/sessions/<%= sessions._id %>/assignments/show/marks" class="btn btn-success"
+          data-toggle="modal" data-target=".bd-example-modal-lg">Grade Student</a></div>
+      <div class="modal fade bd-example-modal-lg text-center" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg text-center">
+          <div class="modal-content text-center">
+            <form class="border border-dark p-5 w-100 p-3 rounded text-center" action="/sessions/<%= sessions._id %>/assignments/show" method="POST">
+              <div class="text-center">
+                <h1>
+                  <p class="h2 mb-4">Mark for: <em><%= participant.username %></p>
+                    <% for(var i=0; i < participant.marks.length; i++) { %>
+                      <% total += participant.marks[i]%>
+                      <% } %>
+                </h1>
+              </div>
+             
+              <div class="form-group" id="lecturer">
+                <input type="text" class="form-control mb-4 input-sm" name="mark" placeholder="Student Mark">
+              </div>
+              <div class="form-group">
+                <label> Upload Rubric with mark</label>
+              <div class="input-group">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="inputGroupFile04"  multiple>
+                  <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
+                </div>
+              </div>
+            </div>
+              <div class="form-group" id="identification" style="display:none">
+                <input type="text" class="form-control mb-4 input-sm" name="id" value="<%= participant.id %>" >
+              </div>
+              <div id="moderator" style="display:none">
+                <div class="form-group">
+                  <strong>
+                    <label >Moderator</label>
+                  </strong>
+                  
+                  <input type="text" class="form-control mb-4 input-sm" name="moderatorMark" placeholder="Moderated Mark">
+                </div>
+              </div>
+              <div class="form-check form-group">
+                <input type="checkbox" class="form-check-input" id="materialUnchecked">
+                <label class="form-check-label" for="materialUnchecked">I am a moderator</label>
+              </div>
+              <div class="form-group" style="display:none" id="total-mark">
+                <strong><label>total</label></strong>
+                <input type="text" class="form-control mb-4 input-sm" name="total" value=<%= total %>>
+              </div>
+              <div class="form-group text-center">
+                <input type="submit" class="btn btn-primary custom-btn" value="Submit">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </li>
+    <p></p>
+    <% }); %>
   </ul>
-  <% } %>
-
 </div>
+
 
 
 <%- include("partials/footer") %>

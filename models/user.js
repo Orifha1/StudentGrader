@@ -7,8 +7,21 @@ var UserSchema = new mongoose.Schema({
     personNumber:String,
     supervisor: String,
     projectTitle: String,
+    marks: [{type:Number}],
+    total: Number,
+    moderatorMark: Number, 
+
+    
+    //marksAvg: {$avg:"$marks"},
+     
     isAdmin: {type: Boolean, default: false},
     accessValue: {type: Boolean, default: false},
+    assignments: 
+      {
+         type: mongoose.Schema.Types.ObjectId,
+         ref: "Assignment"
+      },
+  
     sessions: [
         {
            type: mongoose.Schema.Types.ObjectId,
