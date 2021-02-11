@@ -6,11 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Student-Grader</title>
+    
     <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
+
 
 </head>
 
@@ -25,31 +27,55 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse flex-row-reverse " id="navbarNav">
-                <ul class="nav navbar-nav">
-                    <% if(!currentUser){ %>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/login">
-                            Login
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/register">
-                            Sign-Up
-                        </a>
-                    </li>
-                    <% } else { %>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            Signed In As <%= currentUser.username %>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/logout">
-                            Logout
-                        </a>
-                    </li>
-                    <% } %>
-                </ul>
+                <strong>
+                    <ul class="nav navbar-nav">
+                        <% if(!currentUser){ %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">
+                                Login
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/sessions">
+                                Sessions
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/register">
+                                Sign-Up
+                            </a>
+                        </li>
+                        <% } else { %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/users/<%= currentUser.id %>">
+                                Signed In As <%= currentUser.username %>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/sessions">
+                                Sessions
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout">
+                                Logout
+                            </a>
+                        </li>
+                        <% } %>
+                    </ul>
+                </strong>
+
             </div>
         </div>
     </nav>
+
+    <div class="container">
+        <% if(error && error.length > 0) { %>
+          <div class="alert alert-danger"><p><%=error %></p></div>
+        <% } %>
+        
+        <% if(success && success.length > 0) { %>
+          <div class="alert alert-success"><p><%= success %></p></div>
+        <% } %>
+     </div>
+     <div class="container">

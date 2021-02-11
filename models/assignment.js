@@ -1,7 +1,6 @@
 
 var mongoose = require("mongoose");
 
-
 var assignmentsSchema = new mongoose.Schema({  
     text: String,
     description: String,
@@ -12,8 +11,19 @@ var assignmentsSchema = new mongoose.Schema({
             ref: "User"
         },
         username: String
-    }
-
+    },
+    participants: [
+        {
+           type: mongoose.Schema.Types.ObjectId,
+           ref: "User"
+        }
+     ],
+    marks: {
+        id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Mark"
+        },
+    },
     
 });
 module.exports = mongoose.model("Assignment", assignmentsSchema);

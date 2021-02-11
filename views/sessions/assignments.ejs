@@ -1,19 +1,88 @@
 <%- include("../partials/header") %>
 
+<div class="container" id="assignments-content">
 
-<h1>I am showing assignments</h1>
+<h1 class="text-center">Assignments</h1>
+<% if(currentUser && session.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
+    <form action="/sessions/<%= session._id %>?_method=DELETE" method="POST" class="delete-form text-center" id="rap">
+      <button class="btn btn-danger">Delete this Session</button>
+    </form>
+<% } %>
+<div class="text-center"><a href="#" class="btn btn-success"
+    data-toggle="modal" data-target=".bd-example-modal-lg" id="divRuric">Download Rubric</a></div>
 
-<% session.assignments.forEach(function(assignment){ %>
-    <p>
-        <strong><%= assignment.author.username %></strong> - <%= assignment.text %>
-    </p>
-    <p><%= assignment.description %></p>
-<% }) %>
-
+    <hr>
+    <% session.assignments.forEach(function(assignment){ %>
+        <div class="border rounded" id="assignmentsContentDivider">
+            <div class="caption">
+                <p>
+                    <h2>   
+                        <strong><%= assignment.author.username %></strong> - <%= assignment.text %>
+                    </h2>    
+                </p>
+            </div>
+            <p class="text-right"><span>Created: <%= assignment.created.toDateString() %></span> </p>
+            <hr>
+            <div>
+                <p><%= assignment.description %></p>
+            </div>
+                <a href="/sessions/<%= session._id %>/assignments/show" class="btn btn-primary">View</a> 
+                <% if(currentUser && currentUser.isAdmin){ %>           
+                <a href="/sessions/<%= session._id %>/assignments/show" class="btn btn-danger">Delete</a>
+                <% } %>
+        </div>       
+    <% }) %>
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="assFormRubric">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title h4 text-center" id="myLargeModalLabel">Assignment Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                  </button>
+            </div>
+            <div id="marks-content">
+                <% for(var i=0; i < images.length; i++) { %>
+                  <tr>
+                    <td><a href="/uploads/<%=images[i].filePath %>" download> Rubric</a></td><p></p>
+                  </tr>
+               <% } %>
+               
+               <% if(currentUser && currentUser.isAdmin){ %>
+                
+                <div class="text-center">
+                    <button type="button" class="btn btn-danger" id="assButtonRubric">Delete Rubrics</button>
+                </div>
+                <% } %>   
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+<% if(currentUser && currentUser.isAdmin){ %>
 <a href="/sessions/<%= session._id %>/assignments/new" class="material-icons floating-btn">add</a>
 <div class="label-container">
     <div class="label-text">Create Session</div>
     <i class="fa fa-play label-arrow"></i>
 </div>
+<% } %>
+
+
+
+<script>
+    const loadImages = async () => {
+       const response = await fetch('http://localhost:3001/images').then(response => response.json());
+       const imagesElem = document.querySelector('.images');
+       imagesElem.innerHTML = '';
+       response.images.forEach(image => {
+           const img = document.createElement('img');
+           img.src = image.filePath;
+           //img.height = '200';
+           imagesElem.appendChild(img);
+       });
+   };
+
+  window.onload = loadImages;
+</script>
 
 <%- include("../partials/footer") %>
